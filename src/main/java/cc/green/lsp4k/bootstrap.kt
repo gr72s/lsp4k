@@ -109,7 +109,7 @@ class Bootstrap(private val proxy: Any, val isServer: Boolean) {
                     )
                 )
                 .create()
-            val serializer = Serializer(methodInfoMap, gson)
+            val serializer = Serializer(gson)
 
             val serviceEndpoint = ServiceEndpoint.createServiceEndpoint(services, logHandler)
 

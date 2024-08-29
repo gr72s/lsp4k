@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken
  * @email    alan_greens@outlook.com
  * @date     2024-08-29 14:14
  */
-class Serializer(val methodInfoMap: Map<String, MethodInfo>, private val gson: Gson) {
+class Serializer(private val gson: Gson) {
 
     fun serialize(message: Message): String = gson.toJson(message)
 
