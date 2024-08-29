@@ -24,6 +24,7 @@ interface InterfaceA {
 
     @Request
     fun getB111111(a: Boolean): CompletableFuture<Boolean>
+    @Request
     fun getB222222(a: Boolean): CompletableFuture<Boolean>
 
     @Request

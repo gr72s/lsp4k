@@ -122,16 +122,6 @@ class Bootstrap(private val proxy: Any, val isServer: Boolean) {
 
             if (client) {
                 val webSocketClient = WebSocketClient()
-                webSocketClient.addSessionListener(object : WebSocketSessionListener {
-
-                    override fun onWebSocketSessionCreated(session: Session?) {
-                        println("11111${session.hashCode()}")
-                    }
-
-                    override fun onWebSocketSessionOpened(session: Session?) {
-                        println("22222${session.hashCode()}")
-                    }
-                })
                 webSocketClient.maxTextMessageSize = maxTextMessageSize.toLong()
                 webSocketClient.idleTimeout = Duration.ofMinutes(30)
                 webSocketClient.start()

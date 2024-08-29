@@ -1,7 +1,5 @@
 package cc.green.lsp4k
 
-import java.io.File
-
 /*
  * @author   Alan Green
  * @email    alan_greens@outlook.com
@@ -21,9 +19,13 @@ fun main() {
 //    println(open)
 
     println("$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    val future = interfaceA.getB222222(false)
-    val get = future.get()
-    println(get)
+    try {
+        val future = interfaceA.getB222222(false)
+        val get = future.get()
+        println(get)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
     println("$$$$$$$$$$$$$$$$$$$$$$$$$$")
 //    val get2 = interfaceA.getBoolean(true).get()
 //    println(get2)
