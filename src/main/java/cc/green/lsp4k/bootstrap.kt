@@ -4,6 +4,8 @@ import cc.green.lsp4k.adapters.MessageTypeAdapter
 import com.google.gson.GsonBuilder
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.handler.ContextHandler
+import org.eclipse.jetty.websocket.api.Session
+import org.eclipse.jetty.websocket.api.WebSocketSessionListener
 import org.eclipse.jetty.websocket.client.WebSocketClient
 import org.eclipse.jetty.websocket.server.WebSocketUpgradeHandler
 import java.net.URI
@@ -32,6 +34,10 @@ class Bootstrap(private val proxy: Any, val isServer: Boolean) {
 
     constructor(server: Server, proxy: Any) : this(proxy, false) {
         this.server = server
+    }
+
+    fun start() {
+        server?.start()
     }
 
     // Java语法无法使用
@@ -116,6 +122,16 @@ class Bootstrap(private val proxy: Any, val isServer: Boolean) {
 
             if (client) {
                 val webSocketClient = WebSocketClient()
+                webSocketClient.addSessionListener(object : WebSocketSessionListener {
+
+                    override fun onWebSocketSessionCreated(session: Session?) {
+                        println("11111${session.hashCode()}")
+                    }
+
+                    override fun onWebSocketSessionOpened(session: Session?) {
+                        println("22222${session.hashCode()}")
+                    }
+                })
                 webSocketClient.maxTextMessageSize = maxTextMessageSize.toLong()
                 webSocketClient.idleTimeout = Duration.ofMinutes(30)
                 webSocketClient.start()
@@ -126,11 +142,13 @@ class Bootstrap(private val proxy: Any, val isServer: Boolean) {
                 val server = Server(port)
                 val contextHandler = ContextHandler("/ws")
                 server.handler = contextHandler
-                contextHandler.handler = WebSocketUpgradeHandler.from(server, contextHandler) {
+
+                val upgradeHandler = WebSocketUpgradeHandler.from(server, contextHandler) {
                     it.idleTimeout = Duration.ofMinutes(30)
                     it.addMapping("/service") { _, _, _ -> messageHandle }
                 }
-                server.start()
+
+                contextHandler.handler = upgradeHandler
                 return Bootstrap(server, proxy)
             }
         }

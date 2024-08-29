@@ -20,6 +20,7 @@ class WebsocketMessageHandle(
     override fun consume(message: Message) {
         val msg = serializer.serialize(message)
         session.sendText(msg, Callback.NOOP)
+        println("sendText: $msg")
     }
 
     override fun onWebSocketOpen(session: Session) {
@@ -28,6 +29,8 @@ class WebsocketMessageHandle(
     }
 
     override fun onWebSocketText(value: String?) {
+        println("---------------")
+        println("onWebSocketText: ${value}")
         value?.let {
             logHandler.debug("ws: OnText $value")
             val message = serializer.deserialize(value)

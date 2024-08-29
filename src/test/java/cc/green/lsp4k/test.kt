@@ -23,6 +23,10 @@ interface InterfaceA {
     fun getData(a: Int)
 
     @Request
+    fun getB111111(a: Boolean): CompletableFuture<Boolean>
+    fun getB222222(a: Boolean): CompletableFuture<Boolean>
+
+    @Request
     fun open(fileParams: FileParams): CompletableFuture<Boolean>
 
     @Notification
@@ -37,6 +41,14 @@ class InterfaceAImpl : InterfaceA {
         println("bb getData ".repeat(a))
     }
 
+    override fun getB111111(a: Boolean): CompletableFuture<Boolean> {
+        return CompletableFuture.completedFuture(a)
+    }
+
+    override fun getB222222(a: Boolean): CompletableFuture<Boolean> {
+        return CompletableFuture.completedFuture(a)
+    }
+
     override fun open(fileParams: FileParams): CompletableFuture<Boolean> {
         val path = Paths.get(fileParams.location)
         return CompletableFuture.completedFuture(Files.exists(path))
@@ -45,6 +57,26 @@ class InterfaceAImpl : InterfaceA {
     override fun open2(fileParams: FileParams) {
         val path = Paths.get(fileParams.location)
         println(Files.exists(path))
+    }
+
+}
+
+interface Interface2 {
+    @Request
+    fun test(): Boolean
+
+    @Notification
+    fun test2()
+}
+
+
+class Interface2Impl : Interface2 {
+    override fun test(): Boolean {
+        return true
+    }
+
+    override fun test2() {
+        println("Interface2Impl::test2")
     }
 
 }

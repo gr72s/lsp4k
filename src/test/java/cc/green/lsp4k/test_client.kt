@@ -12,14 +12,22 @@ fun main() {
     val bootstrap =
         Bootstrap.Builder.setInterfaces(listOf(InterfaceA::class.java)).setServices(listOf(InterfaceAImpl())).build()
 
-    val interfaceA = bootstrap.get<InterfaceA>()
     // val re = interfaceA.re(CancelParam(3))
+    val interfaceA = bootstrap.get<InterfaceA>()
 
-    val params =
-        FileParams(File("").toURI())
-    val open = interfaceA.open(params)
-    println(open)
+//    val params =
+//        FileParams(File(ResourceHelper.getExistFile("test1").absolutePath).toURI())
+//    val open = interfaceA.open(params)
+//    println(open)
 
-    interfaceA.open2(params)
+    println("$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    val future = interfaceA.getB222222(false)
+    val get = future.get()
+    println(get)
+    println("$$$$$$$$$$$$$$$$$$$$$$$$$$")
+//    val get2 = interfaceA.getBoolean(true).get()
+//    println(get2)
+
+//    interfaceA.open2(params)
 
 }
