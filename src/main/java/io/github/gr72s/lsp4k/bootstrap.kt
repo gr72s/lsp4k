@@ -1,11 +1,9 @@
-package cc.green.lsp4k
+package io.github.gr72s.lsp4k
 
-import cc.green.lsp4k.adapters.MessageTypeAdapter
+import io.github.gr72s.lsp4k.adapters.MessageTypeAdapter
 import com.google.gson.GsonBuilder
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.handler.ContextHandler
-import org.eclipse.jetty.websocket.api.Session
-import org.eclipse.jetty.websocket.api.WebSocketSessionListener
 import org.eclipse.jetty.websocket.client.WebSocketClient
 import org.eclipse.jetty.websocket.server.WebSocketUpgradeHandler
 import java.net.URI

@@ -1,4 +1,4 @@
-package cc.green.lsp4k
+package io.github.gr72s.lsp4k
 
 import org.eclipse.jetty.websocket.api.Callback
 import org.eclipse.jetty.websocket.api.Session
