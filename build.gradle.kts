@@ -1,5 +1,3 @@
-import org.jreleaser.gradle.plugin.dsl.deploy.maven.MavenCentralMavenDeployer
-
 plugins {
     kotlin("jvm") version "1.9.21"
     id("java-library")
@@ -11,7 +9,7 @@ plugins {
 val versionDefine = "1.0"
 val isRelease = !versionDefine.endsWith("-SNAPSHOT")
 
-group = "cc.green"
+group = "io.github.gr72s"
 version = versionDefine
 
 extra["name"] = "LSP for Kotlin"
@@ -44,7 +42,7 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            groupId = "cc.green"
+            groupId = "io.github.gr72s"
             artifactId = "lsp4k"
             versionMapping {
                 usage("java-api") {
@@ -61,7 +59,7 @@ publishing {
                 packaging = "jar"
                 inceptionYear = "2024"
                 licenses {
-                    licenses {
+                    license {
                         name = "MIT"
                         url = "http://www.opensource.org/licenses/mit-license.php"
                     }
@@ -107,7 +105,7 @@ jreleaser {
             mavenCentral {
                 create("sonatype") {
                     setActive("ALWAYS")
-                    url  = "https://central.sonatype.com/api/v1/publisher"
+                    url = "https://central.sonatype.com/api/v1/publisher"
                     stagingRepository("build/staging-deploy")
                 }
             }

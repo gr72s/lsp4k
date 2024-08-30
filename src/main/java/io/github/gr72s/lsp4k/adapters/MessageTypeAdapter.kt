@@ -1,6 +1,5 @@
-package cc.green.lsp4k.adapters
+package io.github.gr72s.lsp4k.adapters
 
-import cc.green.lsp4k.*
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import com.google.gson.TypeAdapterFactory
@@ -8,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
+import io.github.gr72s.lsp4k.*
 import kotlin.reflect.KParameter
 import kotlin.reflect.jvm.javaType
 

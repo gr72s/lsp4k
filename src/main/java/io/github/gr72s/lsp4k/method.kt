@@ -1,4 +1,4 @@
-package cc.green.lsp4k
+package io.github.gr72s.lsp4k
 
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
