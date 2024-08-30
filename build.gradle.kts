@@ -1,14 +1,26 @@
+import org.jreleaser.gradle.plugin.dsl.deploy.maven.MavenCentralMavenDeployer
+
 plugins {
     kotlin("jvm") version "1.9.21"
-    id("java")
+    id("java-library")
     `maven-publish`
+    id("org.jreleaser") version "1.13.1"
+    signing
 }
 
+val versionDefine = "1.0"
+val isRelease = !versionDefine.endsWith("-SNAPSHOT")
+
 group = "cc.green"
-version = "1.0-SNAPSHOT"
+version = versionDefine
 
 extra["name"] = "LSP for Kotlin"
 extra["description"] = "JsonRPC implement"
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 repositories {
     mavenCentral()
@@ -26,6 +38,81 @@ dependencies {
 
     implementation("org.apache.logging.log4j:log4j-core:2.19.0")
     implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.19.0")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = "cc.green"
+            artifactId = "lsp4k"
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = "${project.extra["name"]}"
+                description = "${project.extra["description"]}"
+                url = "https://github.com/gr72s/lsp4k"
+                packaging = "jar"
+                inceptionYear = "2024"
+                licenses {
+                    licenses {
+                        name = "MIT"
+                        url = "http://www.opensource.org/licenses/mit-license.php"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "Green"
+                        name = "Alan Green"
+                        email = "alan_greens@outlook.com"
+                        organizationUrl = "https://github.com/gr72s"
+                    }
+                }
+                scm {
+                    url = "git@github.com:gr72s/lsp4k.git"
+                    connection = "scm:git:git@github.com:gr72s/lsp4k.git"
+                    developerConnection = "scm:git:git@github.com:gr72s/lsp4k.git"
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir("staging-deploy").get().asFile.toURI()
+        }
+    }
+}
+
+signing {
+    sign(publishing.publications.getByName("mavenJava"))
+}
+
+tasks.withType<Sign> {
+    onlyIf { isRelease }
+}
+
+jreleaser {
+    signing {
+        setActive("ALWAYS")
+        armored = true
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                create("sonatype") {
+                    setActive("ALWAYS")
+                    url  = "https://central.sonatype.com/api/v1/publisher"
+                    stagingRepository("build/staging-deploy")
+                }
+            }
+        }
+    }
 }
 
 tasks.test {
