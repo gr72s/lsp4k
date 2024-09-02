@@ -4,6 +4,7 @@ plugins {
     `maven-publish`
     id("org.jreleaser") version "1.13.1"
     signing
+    id("io.freefair.aspectj") version "8.10"
 }
 
 val versionDefine = "1.0"
@@ -28,6 +29,7 @@ dependencies {
     implementation("org.eclipse.jetty.websocket:jetty-websocket-jetty-client:12.0.5")
     implementation("org.eclipse.jetty.websocket:jetty-websocket-jetty-api:12.0.5")
     implementation("org.eclipse.jetty.websocket:jetty-websocket-jetty-server:12.0.5")
+    implementation("org.aspectj:aspectjrt:1.9.22")
 
     implementation(kotlin("reflect"))
     implementation("com.google.code.gson:gson:2.10.1")
