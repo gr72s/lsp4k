@@ -7,18 +7,23 @@ plugins {
     id("io.freefair.aspectj") version "8.10"
 }
 
-val versionDefine = "1.0"
+val versionDefine = "1.0.1"
 val isRelease = !versionDefine.endsWith("-SNAPSHOT")
 
 group = "io.github.gr72s"
 version = versionDefine
 
-extra["name"] = "LSP for Kotlin"
+extra["name"] = "lsp4k"
 extra["description"] = "JsonRPC implement"
 
 java {
     withJavadocJar()
     withSourcesJar()
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 repositories {
