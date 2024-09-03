@@ -7,7 +7,7 @@ plugins {
     id("io.freefair.aspectj") version "8.10"
 }
 
-val versionDefine = "1.0.1"
+val versionDefine = "1.0.2"
 val isRelease = !versionDefine.endsWith("-SNAPSHOT")
 
 group = "io.github.gr72s"
