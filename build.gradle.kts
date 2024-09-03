@@ -3,11 +3,9 @@ plugins {
     id("java-library")
     `maven-publish`
     id("org.jreleaser") version "1.13.1"
-    signing
-    id("io.freefair.aspectj") version "8.10"
 }
 
-val versionDefine = "1.0.1"
+val versionDefine = "1.0.2"
 val isRelease = !versionDefine.endsWith("-SNAPSHOT")
 
 group = "io.github.gr72s"
@@ -34,7 +32,6 @@ dependencies {
     implementation("org.eclipse.jetty.websocket:websocket-jetty-client:11.0.20")
     implementation("org.eclipse.jetty.websocket:websocket-jetty-api:11.0.20")
     implementation("org.eclipse.jetty.websocket:websocket-jetty-server:11.0.20")
-    implementation("org.aspectj:aspectjrt:1.9.22")
 
     implementation(kotlin("reflect"))
     implementation("com.google.code.gson:gson:2.10.1")
@@ -92,14 +89,6 @@ publishing {
             url = layout.buildDirectory.dir("staging-deploy").get().asFile.toURI()
         }
     }
-}
-
-signing {
-    sign(publishing.publications.getByName("mavenJava"))
-}
-
-tasks.withType<Sign> {
-    onlyIf { isRelease }
 }
 
 jreleaser {
