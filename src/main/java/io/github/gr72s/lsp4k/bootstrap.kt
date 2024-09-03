@@ -1,11 +1,11 @@
 package io.github.gr72s.lsp4k
 
-import io.github.gr72s.lsp4k.adapters.MessageTypeAdapter
 import com.google.gson.GsonBuilder
+import io.github.gr72s.lsp4k.adapters.MessageTypeAdapter
 import org.eclipse.jetty.server.Server
-import org.eclipse.jetty.server.handler.ContextHandler
+import org.eclipse.jetty.servlet.ServletContextHandler
 import org.eclipse.jetty.websocket.client.WebSocketClient
-import org.eclipse.jetty.websocket.server.WebSocketUpgradeHandler
+import org.eclipse.jetty.websocket.server.config.JettyWebSocketServletContainerInitializer
 import java.net.URI
 import java.time.Duration
 import java.time.LocalTime
@@ -128,15 +128,14 @@ class Bootstrap(private val proxy: Any, val isServer: Boolean) {
                 return Bootstrap(webSocketClient, proxy)
             } else {
                 val server = Server(port)
-                val contextHandler = ContextHandler("/ws")
+                val contextHandler = ServletContextHandler(server, "/ws")
                 server.handler = contextHandler
 
-                val upgradeHandler = WebSocketUpgradeHandler.from(server, contextHandler) {
-                    it.idleTimeout = Duration.ofMinutes(30)
-                    it.addMapping("/service") { _, _, _ -> messageHandle }
+                JettyWebSocketServletContainerInitializer.configure(contextHandler) { servletContext, container ->
+                    container.idleTimeout = Duration.ofMinutes(30)
+                    container.addMapping("/service") { _, _ -> messageHandle }
                 }
 
-                contextHandler.handler = upgradeHandler
                 return Bootstrap(server, proxy)
             }
         }

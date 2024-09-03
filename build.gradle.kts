@@ -31,9 +31,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.eclipse.jetty.websocket:jetty-websocket-jetty-client:12.0.5")
-    implementation("org.eclipse.jetty.websocket:jetty-websocket-jetty-api:12.0.5")
-    implementation("org.eclipse.jetty.websocket:jetty-websocket-jetty-server:12.0.5")
+    implementation("org.eclipse.jetty.websocket:websocket-jetty-client:11.0.20")
+    implementation("org.eclipse.jetty.websocket:websocket-jetty-api:11.0.20")
+    implementation("org.eclipse.jetty.websocket:websocket-jetty-server:11.0.20")
     implementation("org.aspectj:aspectjrt:1.9.22")
 
     implementation(kotlin("reflect"))

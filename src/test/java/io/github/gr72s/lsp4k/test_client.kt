@@ -1,5 +1,7 @@
 package io.github.gr72s.lsp4k
 
+import java.io.File
+
 /*
  * @author   Alan Green
  * @email    alan_greens@outlook.com
@@ -13,10 +15,10 @@ fun main() {
     // val re = interfaceA.re(CancelParam(3))
     val interfaceA = bootstrap.get<InterfaceA>()
 
-//    val params =
-//        FileParams(File(ResourceHelper.getExistFile("test1").absolutePath).toURI())
-//    val open = interfaceA.open(params)
-//    println(open)
+   val params =
+       FileParams(File(ResourceHelper.getExistFile("test1").absolutePath).toURI())
+    val open = interfaceA.open(params)
+    println(open)
 
     println("$$$$$$$$$$$$$$$$$$$$$$$$$$")
     try {
