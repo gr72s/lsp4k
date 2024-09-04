@@ -5,7 +5,7 @@ plugins {
     id("org.jreleaser") version "1.13.1"
 }
 
-val versionDefine = "1.0.5"
+val versionDefine = "1.0.6"
 val isRelease = !versionDefine.endsWith("-SNAPSHOT")
 
 group = "io.github.gr72s"
@@ -29,9 +29,9 @@ repositories {
 }
 
 dependencies {
-    api("org.eclipse.jetty.websocket:websocket-jetty-client:10.0.20")
-    api("org.eclipse.jetty.websocket:websocket-jetty-api:10.0.20")
-    api("org.eclipse.jetty.websocket:websocket-jetty-server:10.0.20")
+    api("org.eclipse.jetty.websocket:websocket-jetty-client:10.0.5")
+    api("org.eclipse.jetty.websocket:websocket-jetty-api:10.0.5")
+    api("org.eclipse.jetty.websocket:websocket-jetty-server:10.0.5")
     api("com.google.code.gson:gson:2.10.1")
 
     implementation(kotlin("reflect"))
