@@ -29,9 +29,9 @@ repositories {
 }
 
 dependencies {
-    api("org.eclipse.jetty.websocket:websocket-jetty-client:11.0.20")
-    api("org.eclipse.jetty.websocket:websocket-jetty-api:11.0.20")
-    api("org.eclipse.jetty.websocket:websocket-jetty-server:11.0.20")
+    api("org.eclipse.jetty.websocket:websocket-jetty-client:10.0.20")
+    api("org.eclipse.jetty.websocket:websocket-jetty-api:10.0.20")
+    api("org.eclipse.jetty.websocket:websocket-jetty-server:10.0.20")
     api("com.google.code.gson:gson:2.10.1")
 
     implementation(kotlin("reflect"))
