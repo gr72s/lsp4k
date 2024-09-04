@@ -29,12 +29,12 @@ repositories {
 }
 
 dependencies {
-    implementation("org.eclipse.jetty.websocket:websocket-jetty-client:11.0.20")
-    implementation("org.eclipse.jetty.websocket:websocket-jetty-api:11.0.20")
-    implementation("org.eclipse.jetty.websocket:websocket-jetty-server:11.0.20")
+    api("org.eclipse.jetty.websocket:websocket-jetty-client:11.0.20")
+    api("org.eclipse.jetty.websocket:websocket-jetty-api:11.0.20")
+    api("org.eclipse.jetty.websocket:websocket-jetty-server:11.0.20")
+    api("com.google.code.gson:gson:2.10.1")
 
     implementation(kotlin("reflect"))
-    implementation("com.google.code.gson:gson:2.10.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
