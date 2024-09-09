@@ -5,7 +5,7 @@ plugins {
     id("org.jreleaser") version "1.13.1"
 }
 
-val versionDefine = "1.0.6"
+val versionDefine = "0.1.0"
 val isRelease = !versionDefine.endsWith("-SNAPSHOT")
 
 group = "io.github.gr72s"
